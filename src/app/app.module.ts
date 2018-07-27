@@ -1,47 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Injectable, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {
-  ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterModule, RouterStateSnapshot,
-  Routes
-} from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { IsNotAuthenticated, IsAuthenticatedChild } from './app.guards';
-
-const appRoutes: Routes = [
-  {
-    path: '',
-    canActivateChild: [IsAuthenticatedChild],
-    children: [
-      {
-        path: '',
-        component: HomeComponent
-      }
-    ]
-  },
-  {
-    path: 'login',
-    canActivate: [IsNotAuthenticated],
-    component: AuthComponent
-  }
-];
+import { PlacesModule } from './places/places.module';
+import { appRoutes } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from './auth/auth.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    AuthModule,
     HomeModule,
+    PlacesModule,
+    MatSidenavModule,
+    RouterModule,
+    MatToolbarModule,
+    MatListModule,
+    MatDialogModule,
+    ComponentsModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false} // !environment.production

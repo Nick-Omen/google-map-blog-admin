@@ -27,19 +27,23 @@ export class AuthInterceptor implements HttpInterceptor {
       url: `${environment.baseUrl}/${request.url}`,
       setHeaders: headers
     });
-    return next.handle(request)
-      .pipe(
-        tap((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            console.log(event);
-            return event;
-          }
-        }, (err: any) => {
-          if (err instanceof HttpErrorResponse) {
-            console.error(event);
-          }
-          return event;
-        })
-      );
+    return next.handle(request);
+      // .pipe(
+      //   tap((event: HttpEvent<any>) => {
+      //     if (event instanceof HttpResponse) {
+      //       console.log('success');
+      //       console.log(event);
+      //       console.log('------------------------------------------------------------------');
+      //     }
+      //     return event;
+      //   }, (err: any) => {
+      //     if (err instanceof HttpErrorResponse) {
+      //       console.log('error');
+      //       console.error(event);
+      //       console.log('------------------------------------------------------------------');
+      //     }
+      //     return event;
+      //   })
+      // );
   }
 }

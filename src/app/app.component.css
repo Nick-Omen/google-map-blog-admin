@@ -1,0 +1,9 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.main {
+  padding: 24px 16px;
+}
+
+.layout-sidebar {
+  width: 320px;
+}

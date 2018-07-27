@@ -1,9 +1,25 @@
-<header>
-  header
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<footer>
-  footer
-</footer>
+<mat-drawer-container class="layout-container">
+  <mat-drawer class="layout-sidebar" mode="side" [opened]="isAuthenticated()">
+    <mat-list>
+      <a [routerLink]="['places']">
+        <mat-list-item>
+          Places
+        </mat-list-item>
+      </a>
+      <a (click)="logout()">
+        <mat-list-item>
+          Log out
+        </mat-list-item>
+      </a>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+      <span>Dashboard</span>
+    </mat-toolbar>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>

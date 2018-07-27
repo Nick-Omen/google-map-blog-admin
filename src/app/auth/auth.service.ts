@@ -6,6 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { LoginModel, LoginResponseModel } from './auth.models';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogDataModel
+} from '../components/dialogs/confirm-dialog/confirm-dialog.component';
 
 function getTokenPayload(token) {
   if (!token) {
@@ -30,7 +35,8 @@ function tokenNotExpired(token) {
 })
 export class AuthService {
   constructor(private router: Router,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private dialog: MatDialog) {
   }
 
   public getToken(): string {
@@ -51,6 +57,10 @@ export class AuthService {
 
   public isRemember(): boolean {
     return LocalStorage.getItem('is_remember') !== null;
+  }
+
+  public enableRemember() {
+    LocalStorage.setItem('is_remember', true);
   }
 
   public saveCredentials(data: LoginResponseModel) {
@@ -111,5 +121,6 @@ export class AuthService {
 
   public logout() {
     this.purgeCredentials();
+    this.router.navigate(['login']);
   }
 }
